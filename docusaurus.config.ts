@@ -6,7 +6,9 @@ import {config as dotenvconfig}  from "dotenv";
 dotenvconfig();
 
 /* TODO: change to read configuration from environment */
-const blogEnabled = Boolean(process.env.BLOG_ENABLED === 'true')
+const blogEnabled = Boolean(process.env.BLOG_ENABLED === 'true');
+const gitRepoUrl = process.env.GIT_REPOSITORY_URL ?? "https://github.com/mickkc/dso-blog";
+const deploymentBranch = process.env.DEPLOYMENT_BRANCH;
 
 const config: Config = {
   title: 'Tim\'s DevSecOps Blog',
@@ -24,7 +26,7 @@ const config: Config = {
   organizationName: process.env.GITHUB_ORG, // Usually your GitHub org/user name.
   projectName: process.env.GITHUB_PROJECT, // Usually your repo name.
 
-  deploymentBranch: process.env.DEPLOYMENT_BRANCH,
+  deploymentBranch: deploymentBranch,
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -43,8 +45,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          editUrl:
-            'https://github.com/mickkc/dso-blog',
+          editUrl: `${gitRepoUrl}/tree/${deploymentBranch ?? "main"}`,
         },
         blog: blogEnabled ? 
           {
@@ -53,8 +54,7 @@ const config: Config = {
               type: ['rss', 'atom'],
               xslt: true,
             },
-            editUrl:
-              'https://github.com/mickkc/dso-blog',
+            editUrl: `${gitRepoUrl}/tree/${deploymentBranch ?? "main"}`,
             onInlineTags: 'warn',
             onInlineAuthors: 'warn',
             onUntruncatedBlogPosts: 'warn',
