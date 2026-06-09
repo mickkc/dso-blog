@@ -84,7 +84,7 @@ const config: Config = {
           label: 'Docs',
         },
         {
-          href: 'https://github.com/spmse/dev-blog-template',
+          href: gitRepoUrl,
           label: 'Github',
           position: 'right',
         },
