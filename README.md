@@ -51,13 +51,7 @@ This repository hosts a developer blog built with Docusaurus. It includes tools 
 
 4. Deployment
 
-   In order to deploy onto Github Pages, ensure that your `docusaurus.config.ts` conforms with the [documentation guidelines](https://docusaurus.io/docs/deployment#deploying-to-github-pages). After that is ensured run the following command to deploy:
-
-   ```
-   $ USE_SSH=true pnpm deploy
-   ```
-
-For detailed information about deploying this Docusaurus project, refer to the [Deployment](#deployment) section below.
+   In order to deploy onto Github Pages, ensure that your `docusaurus.config.ts` conforms with the [documentation guidelines](https://docusaurus.io/docs/deployment#deploying-to-github-pages). After that is ensured, refer to the [Deployment](#deployment) section below.
 
 ## Repository Structure
 
@@ -78,21 +72,11 @@ New content can be added as follows:
 
 ## Deployment
 
-### Deploy to Github Pages
+### Deploy to GitHub Pages
 
-To deploy using SSH:
-
-```
-$ USE_SSH=true pnpm deploy
-```
-
-To deploy without using SSH, run:
-
-```
-$ GIT_USER=<Your GitHub username> pnpm deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+This blog is deployed automatically whenever a new commit is pushed to the main branch.
+This is done using a GitHub action, so make sure that GitHub Pages are enabled and that the source is set to "GitHub Actions".
+You can find this option under `Settings > Pages > Build and Deployment`.
 
 ### Deploying using NGINX
 
