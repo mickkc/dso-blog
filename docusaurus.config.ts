@@ -73,7 +73,7 @@ const config: Config = {
     navbar: {
       title: 'Tim\'s DevSecOps Blog',
       logo: {
-        alt: 'My Site Logo',
+        alt: 'Blog Logo',
         src: 'img/logo.png',
       },
       items: [
