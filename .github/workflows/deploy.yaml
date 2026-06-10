@@ -36,6 +36,10 @@ jobs:
     needs: build
     if: ${{  github.ref_name == github.event.repository.default_branch }}
 
+    permissions:
+      pages: write
+      id-token: write
+
     # Deploy to the github-pages environment
     environment:
       name: github-pages
