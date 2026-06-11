@@ -2,10 +2,11 @@
 
 This page documents how I configured my very first cloud server instance in the Developer Akademie DevSecOps Course.
 
+For this project, I set up a virtual server (VPS) by setting up SSH keys, configuring the SSH daemon, installing and configuring Nginx and configuring Git.
+
 ## TOC
 
 - [Quickstart](#quickstart)
-- [Description](#description)
 - [Configuration steps](#configuration-steps)
     - [Configuring SSH keys](#configuring-ssh-keys)
         - [Creating a key pair](#creating-a-key-pair)
@@ -99,10 +100,6 @@ import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
     ```
 
 9. Create an SSH key pair on the server and add the public key to your [GitHub Settings](https://github.com/settings/keys).
-
-## Description
-
-For this project, I set up a virtual server (VPS) by setting up SSH keys, configuring the SSH daemon, installing and configuring Nginx and configuring Git.
 
 ## Configuration steps
 
