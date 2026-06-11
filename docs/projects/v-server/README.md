@@ -345,5 +345,6 @@ After clicking "Add SSH key" and confirming my Identity, I could use GitHub thro
 
 ## Further References
 
-1: Learn more about ed25519: https://ed25519.cr.yp.to/
-2: This project's GitHub repo: https://github.com/mickkc/vServer
+1. Learn more about ed25519: https://ed25519.cr.yp.to/
+2. This project's GitHub repo: https://github.com/mickkc/vServer
+3. Project checklist: [PDF](VServer%20Checkliste.pdf)
