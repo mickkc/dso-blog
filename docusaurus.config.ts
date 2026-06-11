@@ -6,15 +6,17 @@ import {config as dotenvconfig}  from "dotenv";
 dotenvconfig();
 
 /* TODO: change to read configuration from environment */
-const blogEnabled = Boolean(process.env.BLOG_ENABLED === 'true')
+const blogEnabled = Boolean(process.env.BLOG_ENABLED === 'true');
+const gitRepoUrl = process.env.GIT_REPOSITORY_URL ?? "https://github.com/mickkc/dso-blog";
+const deploymentBranch = process.env.DEPLOYMENT_BRANCH;
 
 const config: Config = {
-  title: 'DSO Live Demo Docs',
-  tagline: 'Dinosaurs are cool',
+  title: 'Tim\'s DevSecOps Blog',
+  tagline: 'DevSecOps Enthusiast with a passion for details and efficiency',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: process.env.DEPLOYMENT_URL ?? "https://spmse.github.io",
+  url: process.env.DEPLOYMENT_URL ?? "https://mickkc.github.io",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: process.env.BASE_URL ?? "/",
@@ -24,7 +26,7 @@ const config: Config = {
   organizationName: process.env.GITHUB_ORG, // Usually your GitHub org/user name.
   projectName: process.env.GITHUB_PROJECT, // Usually your repo name.
 
-  deploymentBranch: process.env.DEPLOYMENT_BRANCH,
+  deploymentBranch: deploymentBranch,
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -43,10 +45,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/spmse/dev-blog-template',
+          editUrl: `${gitRepoUrl}/tree/${deploymentBranch ?? "main"}`,
         },
         blog: blogEnabled ? 
           {
@@ -55,11 +54,7 @@ const config: Config = {
               type: ['rss', 'atom'],
               xslt: true,
             },
-            // Please change this to your repo.
-            // Remove this to remove the "edit this page" links.
-            editUrl:
-              'https://github.com/spmse/dev-blog-template',
-            // Useful options to enforce blogging best practices
+            editUrl: `${gitRepoUrl}/tree/${deploymentBranch ?? "main"}`,
             onInlineTags: 'warn',
             onInlineAuthors: 'warn',
             onUntruncatedBlogPosts: 'warn',
@@ -76,10 +71,10 @@ const config: Config = {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: 'My Site',
+      title: 'Tim\'s DevSecOps Blog',
       logo: {
-        alt: 'My Site Logo',
-        src: 'img/logo.svg',
+        alt: 'Blog Logo',
+        src: 'img/logo.png',
       },
       items: [
         {
@@ -89,7 +84,7 @@ const config: Config = {
           label: 'Docs',
         },
         {
-          href: 'https://github.com/spmse/dev-blog-template',
+          href: gitRepoUrl,
           label: 'Github',
           position: 'right',
         },
@@ -105,22 +100,9 @@ const config: Config = {
               label: 'Tutorial',
               to: '/docs/guides/intro',
             },
-          ],
-        },
-        {
-          title: 'Community',
-          items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
+              label: 'Projects',
+              to: '/docs/projects/overview',
             },
           ],
         },
@@ -129,12 +111,16 @@ const config: Config = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              href: gitRepoUrl,
+            },
+            {
+              label: 'Template',
+              href: "https://github.com/Developer-Akademie-DevSecOpsKurs/dev-blog-template"
             }
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Sven Patrick Meier (spmse). Built with Docusaurus and 💚.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Tim Schachtner (mickkc). Built with Docusaurus, extended from the developer-akademie-starter.`,
     },
     prism: {
       theme: prismThemes.github,
