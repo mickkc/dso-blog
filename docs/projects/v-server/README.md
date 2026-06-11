@@ -319,8 +319,8 @@ After reloading nginx again, it was no longer possible to access the server on p
 To configure my username and email globally, I used `git config`:
 
 ```bash
-git config --global user.name "mickkc"
-git config --global user.email "contact@mickkc.dev"
+git config --global user.name <username>
+git config --global user.email <email@example.org>
 ```
 
 #### 5.2. Adding SSH keys to GitHub
