@@ -108,7 +108,7 @@ For this project, I set up a virtual server (VPS) by setting up SSH keys, config
 
 ### 1. Configuring SSH keys
 
-> [!NOTE]
+> **NOTE:**
 > These steps need to be done on your computer, not the server!
 
 At first, I added the public key from my computer to the server's keystore.
@@ -119,12 +119,12 @@ This allows me to log into the server without having to type my password every t
 I created my SSH keys before to use them on GitHub, but the process is as follows:
 
 1. Run `ssh-keygen -t ed25519`
-    - The `-t ed25519` flag tells `ssh-keygen` to use the `ed25519` algorithm, which is a very fast, but also secure algorithm. <sup>[1](#sources)</sup>
+    - The `-t ed25519` flag tells `ssh-keygen` to use the `ed25519` algorithm, which is a very fast, but also secure algorithm. <sup>[1](#further-references)</sup>
 2. Enter a filename where the key will be saved, or just press enter to use the default value.
 3. Optionally enter a password, or skip it by pressing enter without typing anything in.
 4. You will now have a key and a key.pub (the filename depends on what you input at step #1).
 
-> [!WARNING]  
+> **WARNING:**
 > Don't share the key (without the `.pub` extension) with anyone, treat it like a password!
 
 #### 1.2. Copying the key to the server
@@ -344,3 +344,6 @@ I also entered a Title so I know where the key belongs to in the future.
 After clicking "Add SSH key" and confirming my Identity, I could use GitHub through SSH on my server!
 
 ## Further References
+
+1: Learn more about ed25519: https://ed25519.cr.yp.to/
+2: This project's GitHub repo: https://github.com/mickkc/vServer
