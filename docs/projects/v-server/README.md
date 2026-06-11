@@ -24,14 +24,6 @@ For this project, I set up a virtual server (VPS) by setting up SSH keys, config
         - [Adding SSH keys to GitHub](#adding-ssh-keys-to-github)
 - [Further References](#further-references)
 
-import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
-
-<GithubLinkAdmonition 
-    link="https://github.com/mickkc/vServer"
-    title="Github Repo" 
-    type="tip"
-/>
-
 ## Quickstart
 
 1. Generate an SSH key pair (skip if you already have one)
@@ -262,7 +254,7 @@ To add an alternative page to my Nginx config, I created a new directory inside 
 sudo mkdir /var/www/alternatives
 ```
 
-I also created an alternate-index.html file, which you can find in this repository, and copied it into `/var/www/alternatives`.
+I also created an alternate-index.html file, and copied it into `/var/www/alternatives`.
 
 The html file also includes an image of my cat, which I copied to `/var/www/alternatives` too.
 
@@ -343,5 +335,4 @@ After clicking "Add SSH key" and confirming my Identity, I could use GitHub thro
 ## Further References
 
 1. Learn more about ed25519: https://ed25519.cr.yp.to/
-2. This project's GitHub repo: https://github.com/mickkc/vServer
-3. Project checklist: [PDF](VServer%20Checkliste.pdf)
+2. Project checklist: [PDF](VServer%20Checkliste.pdf)
