@@ -5,7 +5,7 @@
 1. When adding an item to the basket, the frontend sends a request to the backend containing the `ProductId`, `BasketId` and `Quantity`:
     
    ![Add to basket payload](img/payback-payload-before.png)
-2. After intercepting this request with Burp Suite, I can edit the `quantity` to a negative number, which - if ti works -
+2. After intercepting this request with Burp Suite, I can edit the `quantity` to a negative number, which - if it works -
     would make the order have a negative price.
 
     ![Modified add to basket payload](img/payback-payload-after.png)

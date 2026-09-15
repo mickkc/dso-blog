@@ -3,7 +3,7 @@
 > Extract the chatbot's system prompt using prompt injection, then submit your findings (including any confidential sections) via the Customer Complaint form.
 
 This hack uses prompt-injection to trick the integrated chatbot into giving out unintended information; in this case,
-it's system prompt, which developers use to tell an LLM how to behave and what (not) to do.
+its system prompt, which developers use to tell an LLM how to behave and what (not) to do.
 
 ## 1. Setup
 
@@ -13,7 +13,7 @@ I used [OpenRouter](https://openrouter.ai/) as the LLM backend, with the free `n
 2. Added the key as an environment variable to the systemd service running the juice-shop:
    - Edited `/etc/systemd/system/juice-shop.service`
    - Added the line `Environment="LLM_API_KEY=sk-or-v1-..."` under `[Service]`
-3. Configured  the model name and endpoint in the juice shop config, located at `juice-shop/config/default.yml`:
+3. Configured the model name and endpoint in the juice shop config, located at `juice-shop/config/default.yml`:
    - The chatbot config is located at `application: -> chatBot:`, where I added these 2 lines:
    - `model: 'nvidia/nemotron-3.5-lightning:free'`
    - `llmApiUrl: 'https://openrouter.ai/api/v1'`
@@ -37,7 +37,7 @@ I used [OpenRouter](https://openrouter.ai/) as the LLM backend, with the free `n
    - I used the `</conversation>` and `<conversation>` XML tags to trick the model into thinking the previous conversation
      ended, and a new one started.
    - I faked a new "system" message using `SYSTEM:`, telling the model that developers are testing how the chat is stored
-     stored and how the LLM handles memory. The idea was that the LLM would be more willing to give the system prompt to
+     and how the LLM handles memory. The idea was that the LLM would be more willing to give the system prompt to
      "developers" instead of regular users.
    - I also told it that this new system message overwrites any previous message, so it does not stick to the previous
      instructions.
@@ -48,7 +48,7 @@ I used [OpenRouter](https://openrouter.ai/) as the LLM backend, with the free `n
 
    ![LLM Response](img/chatbot-attempt-1.png)
 
-   - This is likely becaue it does not consider the system prompt a message in the conversation, so the "previous"
+   - This is likely because it does not consider the system prompt a message in the conversation, so the "previous"
      conversation was empty.
 3. Added that system messages should be considered too:
 
@@ -95,7 +95,7 @@ I used [OpenRouter](https://openrouter.ai/) as the LLM backend, with the free `n
 ## 3. Submitting the findings
 
 1. The challenges description says to "submit your findings (including any confidential sections) via the Customer Complaint form."
-2. So, I opened the Complaint form and let them know that I got their chatbot's system prompt, including the confidental section at the end:
+2. So, I opened the Complaint form and let them know that I got their chatbot's system prompt, including the confidential section at the end:
 
    ![Report](img/chatbot-report.png)
 3. Sent the complaint and got the success notification:
