@@ -1,0 +1,62 @@
+# Juice-Shop Master
+
+The OWASP juice shop is an intentionally insecure web application that demonstrates many vulnerabilities found in the
+OWASP top 10 list, as well as other security flaws. It's designed to help people learn hacking and teaches developers
+how to fix these vulnerabilities in their own code.
+
+* [Disclaimer](#disclaimer)
+* [Resources used](#resources-used)
+* [Challenges](#challenges)
+  * [Challenge 1: Admin Registration](#challenge-1-admin-registration)
+  * [Challenge 2: Payback time](#challenge-2-payback-time)
+  * [Challenge 3: System Prompt Extraction](#challenge-3-system-prompt-extraction)
+
+import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
+
+## Disclaimer
+
+This documents and all writeups related to it are for educational purposes only. Only perform the described pentesting
+methods using applications specifically designed for it (like the juice-shop) or if you have permission from the owner
+of the application you are trying to find vulnerabilities in.
+
+## Resources used
+
+- [OWASP Juice-Shop](https://owasp.org/www-project-juice-shop/) as the simulated target application.
+- [Burp Suite](https://portswigger.net/burp) for intercepting, inspecting, and modifying HTTP traffic.
+
+<GithubLinkAdmonition
+    link="https://github.com/juice-shop/juice-shop"
+    title="Juice-Shop Repo on GitHub"
+    type="tip"/>
+
+
+## Challenges
+
+The juice shop has over 180 Challenges, randing from one star (easiest) to 6 stars (very hard). For this project, I'll
+show my three favorite challenges from the three-star category.
+
+
+### [Challenge 1](admin-registration.md): Admin Registration
+
+> Register as a user with administrator privileges.
+
+This hack abuses the missing input validation found in the login-endpoint to register a new user with the `admin` role.
+
+✍️ [Read the write-up](admin-registration.md)
+
+### [Challenge 2](payback-time.md): Payback Time
+
+> Place an order that makes you rich.
+
+This hack abuses the fact that the basket item's quantities are not validated when checking out, allowing for orders with negatives prices.
+
+✍️ [Read the write-up](payback-time.md)
+
+### [Challenge 3](system-prompt-extraction.md): System Prompt Extraction
+
+> Extract the chatbot's system prompt using prompt injection, then submit your findings (including any confidential sections) via the Customer Complaint form.
+
+This hack uses prompt-injection to trick the integrated chatbot into giving out unintended information; in this case,
+it's system prompt, which developers use to tell an LLM how to behave and what (not) to do.
+
+✍️ [Read the write-up](system-prompt-extraction.md)
