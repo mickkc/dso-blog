@@ -1,5 +1,15 @@
 # Admin Registration
 
+> Register as a user with administrator privileges.
+
+This hack abuses the missing input validation found in the login-endpoint to register a new user with the `admin` role.
+
+## Disclaimer
+
+This writeup is for educational purposes only. Only perform the described pentesting methods using applications
+specifically designed for it (like the juice-shop) or if you have permission from the owner  of the application you are
+trying to find vulnerabilities in.
+
 ## 1. Figuring out the `User` model
 
 1. When registering, the application sends a `POST` request to `/api/Users/`, to create a new user.

@@ -1,5 +1,15 @@
 # Payback Time
 
+> Place an order that makes you rich.
+
+This hack abuses the fact that the basket item's quantities are not validated when checking out, allowing for orders with negatives prices.
+
+## Disclaimer
+
+This writeup is for educational purposes only. Only perform the described pentesting methods using applications
+specifically designed for it (like the juice-shop) or if you have permission from the owner  of the application you are
+trying to find vulnerabilities in.
+
 ## 1. Creating an order with a negative price
 
 1. When adding an item to the basket, the frontend sends a request to the backend containing the `ProductId`, `BasketId` and `Quantity`:

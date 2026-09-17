@@ -5,6 +5,12 @@
 This hack uses prompt-injection to trick the integrated chatbot into giving out unintended information; in this case,
 its system prompt, which developers use to tell an LLM how to behave and what (not) to do.
 
+## Disclaimer
+
+This writeup is for educational purposes only. Only perform the described pentesting methods using applications
+specifically designed for it (like the juice-shop) or if you have permission from the owner  of the application you are
+trying to find vulnerabilities in.
+
 ## 1. Setup
 
 I used [OpenRouter](https://openrouter.ai/) as the LLM backend, with the free `nvidia/nemotron-3.5-lightning:free` model.
