@@ -11,6 +11,22 @@ This writeup is for educational purposes only. Only perform the described pentes
 specifically designed for it (like the juice-shop) or if you have permission from the owner  of the application you are
 trying to find vulnerabilities in.
 
+## Vulnerabilities
+
+**[CWE-1427](https://cwe.mitre.org/data/definitions/1427.html): Improper Neutralization of Input Used for LLM Prompting**
+
+> The product uses externally-provided data to build prompts provided to large language models (LLMs), but the way these
+> prompts are constructed causes the LLM to fail to distinguish between user-supplied inputs and developer provided system
+> directives.
+
+**[CWE-200](https://cwe.mitre.org/data/definitions/200.html): Exposure of Sensitive Information to an Unauthorized Actor**
+
+> The product exposes sensitive information to an actor that is not explicitly authorized to have access to that information.
+
+## Prerequisites
+
+- [OpenRouter](https://openrouter.ai/) or another LLM backend, configured as described in [Step 1](#1-setup)
+
 ## 1. Setup
 
 I used [OpenRouter](https://openrouter.ai/) as the LLM backend, with the free `nvidia/nemotron-3.5-lightning:free` model.

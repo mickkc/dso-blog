@@ -10,6 +10,18 @@ This writeup is for educational purposes only. Only perform the described pentes
 specifically designed for it (like the juice-shop) or if you have permission from the owner  of the application you are
 trying to find vulnerabilities in.
 
+## Vulnerability
+
+**[CWE-915](https://cwe.mitre.org/data/definitions/915.html) : Improperly Controlled Modification of Dynamically-Determined
+Object Attributes**
+
+> The product receives input from an upstream component that specifies multiple attributes, properties, or fields that
+> are to be initialized or updated in an object, but it does not properly control which attributes can be modified.
+
+## Prerequisites
+
+- [Burp Suite](https://portswigger.net/burp) for intercepting, inspecting, and modifying HTTP traffic.
+
 ## 1. Figuring out the `User` model
 
 1. When registering, the application sends a `POST` request to `/api/Users/`, to create a new user.
