@@ -124,7 +124,7 @@ const config: Config = {
     },
     prism: {
       theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
+      darkTheme: prismThemes.vsDark,
       additionalLanguages: ['powershell', 'hcl'],
       magicComments: [
         // Remember to extend the default highlight class name as well!

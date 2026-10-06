@@ -1,5 +1,3 @@
-import clsx from 'clsx';
-import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
@@ -33,6 +31,8 @@ function HomepageHeader() {
     </header>
   );
 }
+import HomepageHero from "@site/src/components/HomepageHero";
+import {JSX} from "react";
 
 export default function Home(): JSX.Element {
   const {siteConfig} = useDocusaurusContext();
@@ -40,10 +40,7 @@ export default function Home(): JSX.Element {
     <Layout
       title={`Hello from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />">
-      <HomepageHeader />
-      <main>
-        <HomepageFeatures />
-      </main>
+      <HomepageHero/>
     </Layout>
   );
 }
