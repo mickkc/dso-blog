@@ -1,0 +1,97 @@
+# Wordpress
+
+![Banner](/img/projects/wordpress.jpg)
+
+ Wordpress configuration in docker compose, using a mysql database.
+
+import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
+
+<GithubLinkAdmonition
+link="https://github.com/mickkc/wordpress-docker"
+type="tip"
+title="View the GitHub Repository"/>
+
+- [Prerequisites](#prerequisites)
+- [Quickstart](#quickstart)
+- [Usage](#usage)
+    - [Configuration](#configuration)
+    - [Commands](#commands)
+- [Technical information](#technical-information)
+
+ ## Prerequisites
+
+- [Docker](https://docs.docker.com/engine/install)
+- [Docker compose](https://docs.docker.com/compose/install/)
+
+## Quickstart
+
+1. Clone the repository and enter it:
+    ```bash
+    # Clone the repo:
+    git clone git@github.com:mickkc/wordpress-docker.git
+
+    # Enter the directory:
+    cd wordpress-docker
+    ```
+2. Copy the `example.env` and configure the options to your liking:
+    ```bash
+    # Copy it:
+    cp .example.env .env
+
+    # Edit it:
+    nano .env
+    ```
+3. Start the container using `docker compose`:
+    ```bash
+    docker compose up -d
+    ```
+4. You can now access your wordpress blog on port `8080` (http://localhost:8080).
+
+## Usage
+
+### Configuration
+
+The following environment variables **need to be defined** in your `.env`:
+
+| Name             | Description                                            |
+|------------------|--------------------------------------------------------|
+| DB_USERNAME      | The database user's name. Default is `wordpress`.      |
+| DB_PASSWORD      | The database user's password. **Required.**            |
+| DB_ROOT_PASSWORD | The root password for the database. **Also required.** |
+
+The variables are used in both the wordpress and mysql container, so they only need to be specified once inside your `.env`.
+
+:::tip
+You can use `openssl rand -hex 32` to generate a long, secure password.
+:::
+
+### Commands
+
+- Starting the containers: `docker compose up`
+    - To run the container in the background, use the detached option: `docker compose up -d`
+- Stopping the containers: `docker compose down`
+- List containers and their status: `docker compose ps`
+    - To also show stopped containers, use `docker compose ps -a`
+- Updating the images: `docker compose pull`
+
+## Technical information
+
+In the [docker-compose.yml](https://github.com/mickkc/wordpress-docker/blob/main/docker-compose.yml),
+there are two services:
+
+- **wordpress**: The main container.
+    - Uses the [`wordpress` image](https://hub.docker.com/_/wordpress).
+    - Loads the database configuration from the `.env` file.
+    - Depends on the `db`-service.
+    - Part of the `wordpress-network` network, just like the `db`-container.
+    - Restarts, unless it gets explicitly stopped.
+- **db**: The database container.
+    - Uses the [`mysql` image](https://hub.docker.com/_/mysql).
+    - Also loads the database configuration into the appropriate variables that the mysql server expects.
+    - Stores the data in the `db-data` volume, also defined in the `docker-compose.yml`
+    - Also part of the `wordpress-network` network, so it's reachable by the wordpress container.
+    - Restarts, unless it gets explicitly stopped.
+
+The volumes and networks used by the containers are defined at the bottom.
+
+The wordpress container connects to `db:3306`, where `db` is the hostname (in docker compose, the service name is the hostname of the container inside the network). The port `3306` is the default mysql port. It does not need to be mapped using `ports:`, because its only used inside the network, and not the host machine.
