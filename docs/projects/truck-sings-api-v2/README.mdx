@@ -1,0 +1,151 @@
+# Truck Signs API
+
+This project is an online store that sells vinyl signs and lettering for trucks.
+The backend is a Django application with a Django REST Framework API and a built-in admin panel.
+It stores its data in a PostgreSQL database.
+
+The application code came from an existing project that shipped with a broken Docker setup.
+My task was to make it run reliably in containers by fixing and hardening the docker setup and removing hardcoded
+credentials from the codebase.
+
+![Banner](/img/projects/truck-signs-api.png)
+
+- [Prerequisites](#prerequisites)
+- [Quickstart](#quickstart)
+- [Configuration](#configuration)
+- [Technical information](#technical-information)
+  - [Architecture](#architecture)
+  - [Dockerfile](#dockerfile)
+  - [docker-compose.yml](#docker-composeyml)
+  - [entrypoint.sh](#entrypointsh)
+  - [Django settings](#django-settings)
+
+## Prerequisites
+
+- Git
+- [Docker](https://docs.docker.com/engine/install)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+## Quickstart
+
+1. Clone the repository:
+    ```bash
+    git clone git@github.com:mickkc/truck-signs-api.git
+    cd truck-signs-api
+    ```
+2. Build the backend image used in the `docker-compose.yml`:
+    ```bash
+    docker build -t truck-signs-api .
+    ```
+3. Create your `.env` file from the template and fill in the values (see [Configuration](#configuration))
+    ```bash
+    cp example.env .env
+    nano .env
+    ```
+4. Start the stack:
+    ```bash
+    docker compose up -d
+    ```
+5. Open the application:
+    - API: http://localhost:8020
+    - Admin panel: http://localhost:8020/admin
+
+    On a remote server, replace `localhost` with the server's IP address and add that address to `ALLOWED_HOSTS`.
+
+## Configuration
+
+All configuration is passed to the containers through the `.env` file.
+`example.env` lists every available variable. The most important ones are:
+
+|          Variable           | Description                                                         |                    Example                     |
+|:---------------------------:|---------------------------------------------------------------------|:----------------------------------------------:|
+|        `SECRET_KEY`         | Django secret key **Required**                                      | Use `openssl rand -hex 32`<br/>to generate one |
+|           `MODE`            | Application mode (`dev` / `prod`)                                   |                     `prod`                     |
+|       `DEBUG_ENABLED`       | Django debug mode. Use `False` in production                        |                    `False`                     |
+|       `ALLOWED_HOSTS`       | Comma-separated hostnames/IPs Django will serve                     |       `localhost,127.0.0.1,<SERVER_IP>`        |
+|          `DB_NAME`          | Database name, also used to initialize Postgres                     |                 `truck-signs`                  |
+|          `DB_USER`          | Database user, also used to initialize Postgres                     |                 `truck-signs`                  |
+|        `DB_PASSWORD`        | Database password, also used to initialize Postgres                 | Use `openssl rand -hex 32`<br/>to generate one |
+|          `DB_HOST`          | Hostname of the database container                                  |                      `db`                      |
+|          `DB_PORT`          | Port of the database                                                |                     `5432`                     |
+| `DJANGO_SUPERUSER_USERNAME` | Username of the admin account created automatically on startup      |                    `Admin`                     |
+|  `DJANGO_SUPERUSER_EMAIL`   | Email address of the admin account created automatically on startup |              `admin@example.com`               |
+| `DJANGO_SUPERUSER_PASSWORD` | Password of the admin account created automatically on startup      | Use `openssl rand -hex 32`<br/>to generate one |
+
+:::note
+The `DB_*` environment variables are used both for initializing the database, as well as connecting to it from the backend.
+:::
+
+## Technical information
+
+### Architecture
+
+- Both containers share the Docker network tsa-network and reach each other by service name.
+  The backend connects to the host `db`.
+- Only the backend is published to the host on port 8020.
+  The database is reachable only inside the Docker network.
+- Data is stored in named volumes, so it's persisted across container restarts and re-creation.
+
+### Dockerfile
+
+The Dockerfile builds the backend image. The original file did not build at all, so I made the following changes:
+
+|             Before             |                 After                 | Explanation                                                                                          |
+|:------------------------------:|:-------------------------------------:|------------------------------------------------------------------------------------------------------|
+|       `FROM python:2.12`       |    `FROM python:3.13-slim-trixie`     | `2.12` is not a valid Python tag. The slim Debian-based image keeps the image small.                 |
+|               -                |     Install `netcat-traditional`      | The entrypoint uses `nc` to wait for the database. The apt cache is removed to keep the layer small. |
+|       `RUN pip install`        | `RUN pip install -r requirements.txt` | Without `-r requirements.txt`, no dependencies were installed.                                       |
+|               -                |     `RUN chmod +x entrypoint.sh`      | The script must be executable to run as the entrypoint.                                              |
+|            `EXPOSE`            |             `EXPOSE 8080`             | Documents the port Gunicorn listens on.                                                              |
+| `ENTRYPOINT ["entrypoint.sh"]` |  `ENTRYPOINT ["/app/entrypoint.sh"]`  | Run the entrypoint script by its full path.                                                          |
+
+`requirements.txt` is copied and installed before the rest of the source code.
+Docker can therefore reuse the cached dependency layer when only application code changes, which makes rebuilds much faster.
+
+
+### docker-compose.yml
+
+The Compose file runs the backend and the database together.
+
+Database service (`db`):
+
+- Uses `postgres:18.4`, a valid, pinned tag. The previous `postgres:7-alpine` did not exist.
+- Gets its credentials from `${DB_USER}`, `${DB_PASSWORD}` and `${DB_NAME}`. Compose fills these in from the `.env` file.
+- Stores its data in the named volume `postgres_data`, mounted at `/var/lib/postgresql`.
+- The port mapping `5432:5432` was removed, so the database is no longer exposed outside the Docker network.
+- A `pg_isready` healthcheck reports when the database actually accepts connections.
+
+Backend service (`backend`):
+
+- Uses the prebuilt image `truck-signs-api:latest` instead of a `build:` context.
+  The image is built once and then run.
+- Gets all configuration from `env_file: .env`.
+- Maps host port `8020` to container port `8000`.
+- Starts only after the database healthcheck passes (`depends_on: condition: service_healthy`).
+- The separate `command: gunicorn ...` was removed. Gunicorn is now started by the entrypoint script.
+- Static and media files are stored in the named volumes `static_files` and `media`.
+
+Both services:
+
+- `restart: unless-stopped` restarts a container automatically if it crashes or the host reboots, unless it was stopped on purpose.
+- Both services a part of the `tsa-network`.
+
+### entrypoint.sh
+
+This script runs every time the backend container starts. It runs these steps in order:
+
+- Wait for the database. It now sleeps 5 seconds between attempts, and the host and port come from environment variables
+  instead of being hardcoded.
+- Collect static files with `collectstatic --noinput`.
+- Apply database migrations with `python manage.py migrate`, so the schema is up to date before the app starts.
+- Create a superuser automatically, but only if all three `DJANGO_SUPERUSER_*` variables are set.
+  If the user already exists, the command fails, and `|| true` lets the script continue instead of crashing the container.
+- Start Gunicorn on `0.0.0.0:8000` to serve the application.
+
+The script runs with `set -e`, so any failing step stops the container.
+
+### Django settings
+
+In `src/tsa_app/settings.py`, the fallback values for `SECRET_KEY`, `DB_NAME`, `DB_USER` and `DB_PASSWORD` were removed.
+These fallbacks were committed to the repository, and could accidentally end up in production. The values now must come
+from the environment.
