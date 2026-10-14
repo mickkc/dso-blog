@@ -20,7 +20,8 @@
 .heroContent > img {
     float: right;
     border-radius: 1rem;
-    max-width: 25dvw;
+    width: 25dvw;
+    max-width: 300px;
     margin-left: 1rem;
 }
 
