@@ -1,38 +1,8 @@
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
-import Heading from '@theme/Heading';
-
-import styles from './index.module.css';
-
-function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
-  return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className="container">
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
-        </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/guides/intro">
-            Docusaurus Tutorial - 5min ⏱️
-          </Link>
-          <></>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/projects/overview">
-            To my Projects
-          </Link>
-        </div>
-      </div>
-    </header>
-  );
-}
 import HomepageHero from "@site/src/components/HomepageHero";
 import {JSX} from "react";
+import ProjectHighlights from "@site/src/components/ProjectHighlights";
 
 export default function Home(): JSX.Element {
   const {siteConfig} = useDocusaurusContext();
@@ -41,6 +11,7 @@ export default function Home(): JSX.Element {
       title={`Hello from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />">
       <HomepageHero/>
+      <ProjectHighlights/>
     </Layout>
   );
 }

@@ -66,3 +66,7 @@
 ::selection {
   background: var(--ifm-color-primary);
 }
+
+.button--primary {
+  color: var(--custom-color-on-primary);
+}
