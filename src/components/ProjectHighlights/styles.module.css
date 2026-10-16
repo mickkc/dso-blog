@@ -113,7 +113,7 @@
 
 .projectNavItemActive,
 .projectNavItemActive:hover {
-    color: var(--ifm-color-black);
+    color: var(--ifm-color-primary-lightest);
 }
 
 .projectBrowser + .projectList {
@@ -122,7 +122,7 @@
 
 .moreProjects {
     margin-left: calc(var(--ifm-list-left-padding) * -0.5);
-    color: var(--ifm-color-content);
+    color: var(--custom-color-on-primary);
     font-weight: bold;
     display: flex;
     flex-direction: row;
