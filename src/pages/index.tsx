@@ -2,6 +2,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageHero from "@site/src/components/HomepageHero";
 import {JSX} from "react";
+import SkillComponent from "@site/src/components/SkillComponent";
 import ProjectHighlights from "@site/src/components/ProjectHighlights";
 
 export default function Home(): JSX.Element {
@@ -11,6 +12,7 @@ export default function Home(): JSX.Element {
       title={`Hello from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />">
       <HomepageHero/>
+      <SkillComponent/>
       <ProjectHighlights/>
     </Layout>
   );
