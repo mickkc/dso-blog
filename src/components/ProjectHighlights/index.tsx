@@ -29,7 +29,7 @@ const ProjectList: ProjectDetails[] = [
         technologies: [
             { name: 'Python', imageUrl: 'python.svg' },
             { name: 'Django', imageUrl: 'django.svg' },
-            { name: 'YAML', imageUrl: 'yaml-dark.svg' },
+            { name: 'YAML', imageUrl: 'yaml.svg' },
             { name: 'Database', imageUrl: 'database.svg' },
             { name: 'Docker', imageUrl: 'docker.svg' },
         ]
@@ -45,10 +45,10 @@ const ProjectList: ProjectDetails[] = [
         technologies: [
             { name: 'Python', imageUrl: 'python.svg' },
             { name: 'Django', imageUrl: 'django.svg' },
-            { name: 'YAML', imageUrl: 'yaml-dark.svg' },
+            { name: 'YAML', imageUrl: 'yaml.svg' },
             { name: 'Docker', imageUrl: 'docker.svg' },
             { name: 'Database', imageUrl: 'database.svg' },
-            { name: 'Shell scripting', imageUrl: 'shell-dark.svg' },
+            { name: 'Shell scripting', imageUrl: 'shell.svg' },
         ]
     },
     {
@@ -73,8 +73,8 @@ const ProjectList: ProjectDetails[] = [
         documentationUrl: '/docs/projects/mc-server/',
         repositoryUrl: 'https://github.com/mickkc/mc-server',
         technologies: [
-            { name: 'YAML', imageUrl: 'yaml-dark.svg' },
-            { name: 'Shell scripting', imageUrl: 'shell-dark.svg' },
+            { name: 'YAML', imageUrl: 'yaml.svg' },
+            { name: 'Shell scripting', imageUrl: 'shell.svg' },
             { name: 'Docker', imageUrl: 'docker.svg' },
         ]
     },
@@ -87,7 +87,7 @@ const ProjectList: ProjectDetails[] = [
         documentationUrl: '/docs/projects/wordpress/',
         repositoryUrl: 'https://github.com/mickkc/wordpress-docker',
         technologies: [
-            { name: 'YAML', imageUrl: 'yaml-dark.svg' },
+            { name: 'YAML', imageUrl: 'yaml.svg' },
             { name: 'Database', imageUrl: 'database.svg' },
             { name: 'Docker', imageUrl: 'docker.svg' },
         ]
