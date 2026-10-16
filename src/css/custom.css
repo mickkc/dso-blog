@@ -4,27 +4,69 @@
  * work well for content-centric websites.
  */
 
+@font-face {
+  font-family: Quicksand;
+  src: url("/fonts/Quicksand/Quicksand-VariableFont_wght.ttf") format(truetype);
+  font-weight: 500;
+}
+
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-font-family-base: Quicksand, system-ui, -apple-system,
+  Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont,
+  'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol';
+
+  --ifm-h1-font-size: 4rem;
+  --ifm-h2-font-size: 3rem;
+  --ifm-h3-font-size: 2rem;
+  --ifm-h4-font-size: 1rem;
+  --ifm-h5-font-size: 0.785rem;
+  --ifm-h6-font-size: 0.875rem;
+
+  --ifm-font-size-base: 1.2rem;
+
+  --ifm-color-primary: #266AD9;
+  --ifm-color-primary-dark: #2562C4;
+  --ifm-color-primary-darker: #245AAF;
+  --ifm-color-primary-darkest: #224A85;
+  --ifm-color-primary-light: #5696FF;
+  --ifm-color-primary-lighter: #69A2FF;
+  --ifm-color-primary-lightest: #8EB9FF;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  --ifm-link-color: var(--ifm-color-primary-lightest);
+  --ifm-navbar-link-hover-color: var(--ifm-color-primary-lighter);
+  --ifm-menu-color-active: var(--ifm-color-primary-lighter);
+  --ifm-breadcrumb-color-active: var(--ifm-color-primary-lighter);
+  --prism-background-color: var(--ifm-background-surface-color);
+
+  --ifm-background-color: #FFFFFF;
+  --ifm-background-surface-color: #EEEEEE;
+
+  --custom-color-on-primary: #FFFFFF;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
+  --ifm-color-primary: #266AD9;
+  --ifm-color-primary-dark: #2562C4;
+  --ifm-color-primary-darker: #245AAF;
+  --ifm-color-primary-darkest: #224A85;
+  --ifm-color-primary-light: #5696FF;
+  --ifm-color-primary-lighter: #69A2FF;
+  --ifm-color-primary-lightest: #8EB9FF;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+
+  --ifm-background-color: #262E34 !important;
+  --ifm-background-surface-color: #303D47 !important;
+}
+
+::selection {
+  background: var(--ifm-color-primary);
+}
+
+.button--primary {
+  color: var(--custom-color-on-primary);
 }
