@@ -4,6 +4,7 @@ import HomepageHero from "@site/src/components/HomepageHero";
 import {JSX} from "react";
 import SkillComponent from "@site/src/components/SkillComponent";
 import ProjectHighlights from "@site/src/components/ProjectHighlights";
+import HomepageContact from "@site/src/components/HomepageContact";
 
 export default function Home(): JSX.Element {
   const {siteConfig} = useDocusaurusContext();
@@ -14,6 +15,7 @@ export default function Home(): JSX.Element {
       <HomepageHero/>
       <SkillComponent/>
       <ProjectHighlights/>
+      <HomepageContact/>
     </Layout>
   );
 }
