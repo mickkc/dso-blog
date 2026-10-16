@@ -1,0 +1,65 @@
+# Music Server
+
+**Vibin'** is similar to Spotify, except that the music, the server and the data all belong to you. You install
+it once on a home server or a rented one, add your music collection, and then listen to it from anywhere on your
+phone, computer or in a web browser.
+
+![Banner](/img/projects/vibin.png)
+
+The project has two parts that I designed and built myself:
+
+- **The server** stores the music library, organizes it and streams it to devices.
+- **The app** is what users see and use. It runs on Android, iOS, Windows, macOS, Linux and in the browser.
+
+## Why I built it
+
+Streaming services are convenient, but songs can vanish from the catalog, prices go up, and everything you listen to
+gets tracked. Hosting your own music fixes those problems, but most of the existing tools feel dated or are missing some
+features. I wanted something that is as pleasant to use as a commercial app and still gives users full control over their
+own music.
+
+## What it can do
+
+**Listening**
+- Stream your entire collection to any device
+- See synced lyrics while a song plays
+- Use a full-screen "Now Playing" view
+- Show what you're listening to on Discord
+
+**Organizing**
+- Pull in cover art, artist info and lyrics automatically from APIs and Websites
+- Tag songs and link related tracks together
+- Use powerful search and filters to find exactly what you want
+- Edit many songs at once
+- Upload new music straight from the app
+
+**Playlists & sharing**
+- Create playlists and invite friends to edit them with you
+- Make "smart" playlists that update themselves based on rules, for example "every rock song from the 90s"
+- Mark favorites and see listening statistics
+- Embed widgets on other websites as iframes, scripts, or pre-rendered images
+
+**Multiple users & security**
+- Give every family member or friend their own account, with fine-grained permissions
+- Protect accounts with two-factor authentication and email alerts about new sign-ins
+- Customize the app with different color themes
+- Use it in English, German, Dutch or Romanian, with translations contributed by the community
+
+## Technical information
+
+- **Started:** August 2025, still in active development
+- **Over 1100 commits** across the server and app
+- **6 platforms** supported from a single code base
+- **Open source** under the GPLv3 license
+- Covered by **automated tests and builds** that run on every change using Jenkins pipelines
+
+The server is written in **Kotlin** (using the Ktor framework). The app is built with **Flutter** (written in Dart).
+The whole application is packaged with **Docker** and an automated pipeline builds, tests and publishes every new version.
+
+## Links
+
+- Website & documentation: [vibin.rip](https://vibin.rip)
+- Demo: [demo.vibin.rip](https://demo.vibin.rip/) (username: `Demo`, password: `DemoDemo`)
+- Server source code: [github.com/mickkc/vibin](https://github.com/mickkc/vibin)
+- App source code: [github.com/mickkc/vibin-app](https://github.com/mickkc/vibin-app)
+- Docker image: [hub.docker.com/r/mickkc/vibin](https://hub.docker.com/r/mickkc/vibin)
