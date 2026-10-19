@@ -4,11 +4,10 @@ A blog and knowledge base built using [Docusaurus](https://docusaurus.io/), a mo
 
 ## TOC
 
-- [Docusaurus Blog](#docusaurus-blog)
-    - [Quickstart](#quickstart)
-    - [Description](#description)
-    - [Configuration steps](#configuration-steps)
-    - [Further References](#further-references)
+- [Quickstart](#quickstart)
+- [Description](#description)
+- [Configuration steps](#configuration-steps)
+- [Further References](#further-references)
 
 import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
 
