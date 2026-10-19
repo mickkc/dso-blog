@@ -5,7 +5,6 @@ import {config as dotenvconfig}  from "dotenv";
 
 dotenvconfig();
 
-/* TODO: change to read configuration from environment */
 const blogEnabled = Boolean(process.env.BLOG_ENABLED === 'true');
 const gitRepoUrl = process.env.GIT_REPOSITORY_URL ?? "https://github.com/mickkc/dso-blog";
 const deploymentBranch = process.env.DEPLOYMENT_BRANCH;
@@ -68,8 +67,7 @@ const config: Config = {
   ],
 
   themeConfig: {
-    // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'img/social-card.jpg',
     navbar: {
       title: 'Tim Schachtner',
       logo: {
@@ -79,7 +77,7 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          sidebarId: 'mainSidebar',
           position: 'left',
           label: 'Docs',
         },
@@ -96,10 +94,6 @@ const config: Config = {
         {
           title: 'Docs',
           items: [
-            {
-              label: 'Tutorial',
-              to: '/docs/guides/intro',
-            },
             {
               label: 'Projects',
               to: '/docs/projects/overview',
@@ -147,7 +141,7 @@ if (blogEnabled) {
   (config.themeConfig.navbar as any).items.push({to: '/blog', label: 'Blog', position: 'left'});
   (
     config.themeConfig.footer as any
-  ).links[2].items.push({
+  ).links[0].items.push({
     to: '/blog',
     label: 'Blog',
   });
