@@ -7,7 +7,7 @@ export default function (): JSX.Element {
     return (
         <section className={styles.heroSection} id="about-me">
             <div className={`${styles.heroContent} container`}>
-                <img className={styles.heroImage} src="/img/photo.png"/>
+                <img className={styles.heroImage} src="/img/photo.webp"/>
                 <p className={styles.greeting}>
                     Hey there. 👋 I am
                 </p>
