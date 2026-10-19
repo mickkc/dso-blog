@@ -4,7 +4,7 @@ import type NavbarType from '@theme/Navbar';
 import type {WrapperProps} from '@docusaurus/types';
 import {useLocation} from '@docusaurus/router';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import HomepageNavbar from '@site/src/components/HomepageNavbar';
+import HomepageNavbar from '@site/src/components/homepage-navbar';
 
 type Props = WrapperProps<typeof NavbarType>;
 

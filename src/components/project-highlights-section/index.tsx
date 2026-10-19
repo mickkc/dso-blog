@@ -1,6 +1,7 @@
 import {JSX, useState} from "react";
 import styles from './styles.module.css';
 import clsx from "clsx";
+import useBrokenLinks from "@docusaurus/useBrokenLinks";
 
 type ProjectTechnology = {
     name: string;
@@ -128,6 +129,7 @@ function ProjectDetailView({ title, description, imageUrl, documentationUrl, rep
 
 export default function ProjectHighlights(): JSX.Element {
     const [selectedIdx, setSelectedIdx] = useState(0);
+    useBrokenLinks().collectAnchor('my-projects');
 
     return (
         <section className={styles.projectDetails} id="my-projects">

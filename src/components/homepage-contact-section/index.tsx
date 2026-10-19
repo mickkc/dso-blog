@@ -1,5 +1,6 @@
 import styles from './styles.module.css';
 import {JSX} from "react";
+import useBrokenLinks from "@docusaurus/useBrokenLinks";
 
 type ContactOption = {
     icon: string;
@@ -16,6 +17,8 @@ const ContactOptions: Array<ContactOption> = [
 ]
 
 export default function HomepageContact(): JSX.Element {
+    useBrokenLinks().collectAnchor('contact');
+
     return (
         <section className={styles.contact} id="contact">
             <div className={`container ${styles.contactContainer}`}>

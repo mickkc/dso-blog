@@ -1,8 +1,11 @@
 import styles from './styles.module.css';
 import {JSX} from "react";
+import useBrokenLinks from "@docusaurus/useBrokenLinks";
 
 
 export default function (): JSX.Element {
+    useBrokenLinks().collectAnchor('about-me');
+
     return (
         <section className={styles.heroSection} id="about-me">
             <div className={`${styles.heroContent} container`}>

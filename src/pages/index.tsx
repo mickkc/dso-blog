@@ -1,10 +1,10 @@
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import HomepageHero from "@site/src/components/HomepageHero";
+import HomepageHero from "@site/src/components/homepage-hero";
 import {JSX} from "react";
-import SkillComponent from "@site/src/components/SkillComponent";
-import ProjectHighlights from "@site/src/components/ProjectHighlights";
-import HomepageContact from "@site/src/components/HomepageContact";
+import SkillComponent from "@site/src/components/my-skills-section";
+import ProjectHighlights from "@site/src/components/project-highlights-section";
+import HomepageContact from "@site/src/components/homepage-contact-section";
 
 export default function Home(): JSX.Element {
   const {siteConfig} = useDocusaurusContext();

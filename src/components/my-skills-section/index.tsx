@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import {JSX, useEffect, useRef, useState} from "react";
 import styles from './styles.module.css';
+import useBrokenLinks from "@docusaurus/useBrokenLinks";
 
 type Skill = {
     icon: string;
@@ -153,6 +154,7 @@ export default function SkillComponent(): JSX.Element {
     const listRef = useRef<HTMLDivElement>(null);
     const [page, setPage] = useState(0);
     const [pageCount, setPageCount] = useState(1);
+    useBrokenLinks().collectAnchor('my-skills');
 
     const getPageWidth = (list: HTMLDivElement) =>
         list.clientWidth + (parseFloat(getComputedStyle(list).columnGap) || 0);

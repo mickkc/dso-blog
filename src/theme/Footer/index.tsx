@@ -4,7 +4,7 @@ import type FooterType from '@theme/Footer';
 import type {WrapperProps} from '@docusaurus/types';
 import {useLocation} from '@docusaurus/router';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import HomepageFooter from "@site/src/components/HomepageFooter";
+import HomepageFooter from "@site/src/components/homepage-footer";
 
 type Props = WrapperProps<typeof FooterType>;
 
