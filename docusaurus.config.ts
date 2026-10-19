@@ -11,7 +11,7 @@ const gitRepoUrl = process.env.GIT_REPOSITORY_URL ?? "https://github.com/mickkc/
 const deploymentBranch = process.env.DEPLOYMENT_BRANCH;
 
 const config: Config = {
-  title: 'Tim\'s DevSecOps Blog',
+  title: 'Tim Schachtner',
   tagline: 'DevSecOps Enthusiast with a passion for details and efficiency',
   favicon: 'img/favicon.ico',
 
@@ -71,7 +71,7 @@ const config: Config = {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: 'Tim\'s DevSecOps Blog',
+      title: 'Tim Schachtner',
       logo: {
         alt: 'Blog Logo',
         src: 'img/logo.png',
