@@ -1,10 +1,9 @@
 import {JSX} from "react";
 import styles from './styles.module.css';
-import clsx from "clsx";
 
 export default function HomepageFooter(): JSX.Element {
     return (
-        <footer className={clsx(styles.footer, "container")}>
+        <footer className={`${styles.footer} container`}>
             <a href="#about-me" className={styles.arrow}>
                 <svg width="40" height="90" viewBox="0 0 40 90" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="0.5" y="0.5" width="39" height="89" rx="19.5" stroke="currentColor"/>

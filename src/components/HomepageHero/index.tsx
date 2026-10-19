@@ -1,5 +1,4 @@
 import styles from './styles.module.css';
-import clsx from "clsx";
 import {JSX} from "react";
 
 
@@ -24,7 +23,7 @@ export default function (): JSX.Element {
                     I like working across the whole stack: writing application features, containerising and deploying them,
                     and thinking about how each piece could be attacked or hardened.
                 </p>
-                <a href="#contact" className={clsx('button button--secondary button--lg')}>
+                <a href="#contact" className="button button--secondary button--lg">
                     Contact  me
                 </a>
             </div>

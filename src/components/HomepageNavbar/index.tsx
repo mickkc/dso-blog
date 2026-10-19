@@ -42,7 +42,7 @@ const HomepageNavbar = (): JSX.Element => {
 
     return (
         <header className={clsx(styles.header, !visible && !menuOpen && styles.hidden)}>
-            <nav className={clsx(styles.nav, 'container')}>
+            <nav className={`${styles.nav} container`}>
                 <button
                     type="button"
                     className={styles.menuButton}

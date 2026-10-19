@@ -127,7 +127,7 @@ const SkillList: Array<Skill> = [
 
 function Skill({ icon, name, bulletPoints }: Skill) {
     return (
-        <div className={clsx('card padding--none')}>
+        <div className="card padding--none">
             <div className={styles.skillContent}>
                 <img src={`/img/skills/${icon}`} alt={name} className={styles.skillImage}/>
                 <p className={styles.skillName}>

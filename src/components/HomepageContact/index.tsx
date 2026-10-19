@@ -1,6 +1,5 @@
 import styles from './styles.module.css';
 import {JSX} from "react";
-import clsx from "clsx";
 
 type ContactOption = {
     icon: string;
@@ -19,7 +18,7 @@ const ContactOptions: Array<ContactOption> = [
 export default function HomepageContact(): JSX.Element {
     return (
         <section className={styles.contact} id="contact">
-            <div className={clsx("container", styles.contactContainer)}>
+            <div className={`container ${styles.contactContainer}`}>
                 <div>
                     <h2>
                         Contact me
