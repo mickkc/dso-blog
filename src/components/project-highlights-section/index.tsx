@@ -2,7 +2,7 @@ import {JSX, useState} from "react";
 import styles from './styles.module.css';
 import clsx from "clsx";
 import useBrokenLinks from "@docusaurus/useBrokenLinks";
-import useBaseUrl from "@docusaurus/useBaseUrl";
+import useBaseUrl, {useBaseUrlUtils} from "@docusaurus/useBaseUrl";
 
 type ProjectTechnology = {
     name: string;
@@ -97,6 +97,8 @@ const ProjectList: ProjectDetails[] = [
 ]
 
 function ProjectDetailView({ title, description, imageUrl, documentationUrl, repositoryUrl, technologies }: ProjectDetails) {
+    const { withBaseUrl } = useBaseUrlUtils();
+
     return (
         <div className={styles.project}>
             <div className={styles.projectHeader}>
@@ -106,17 +108,17 @@ function ProjectDetailView({ title, description, imageUrl, documentationUrl, rep
                 <div className={styles.projectTechnologies}>
                     {technologies.map((props, idx) => (
                         <div key={idx} className={styles.projectTechnology}>
-                            <img src={useBaseUrl(`/img/skills/${props.imageUrl}`)} alt={props.name}/>
+                            <img src={withBaseUrl(`/img/skills/${props.imageUrl}`)} alt={props.name}/>
                             <p>{props.name}</p>
                         </div>
                     ))}
                 </div>
             </div>
-            <img src={useBaseUrl(`/img/projects/${imageUrl}`)} className={styles.projectImage}/>
+            <img src={withBaseUrl(`/img/projects/${imageUrl}`)} className={styles.projectImage}/>
             <div className={styles.projectDescription}>
                 <p>{description}</p>
                 <div className={styles.projectButtons}>
-                    {documentationUrl ? <a href={useBaseUrl(documentationUrl)} className="button button--primary" target="_blank">
+                    {documentationUrl ? <a href={withBaseUrl(documentationUrl)} className="button button--primary" target="_blank">
                         Documentation
                     </a> : null}
                     {repositoryUrl ? <a href={repositoryUrl} className="button button--secondary" target="_blank">

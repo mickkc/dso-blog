@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
 import {JSX} from "react";
 import useBrokenLinks from "@docusaurus/useBrokenLinks";
-import useBaseUrl from "@docusaurus/useBaseUrl";
+import {useBaseUrlUtils} from "@docusaurus/useBaseUrl";
 
 type ContactOption = {
     icon: string;
@@ -19,6 +19,7 @@ const ContactOptions: Array<ContactOption> = [
 
 export default function HomepageContact(): JSX.Element {
     useBrokenLinks().collectAnchor('contact');
+    const { withBaseUrl } = useBaseUrlUtils();
 
     return (
         <section className={styles.contact} id="contact">
@@ -42,7 +43,7 @@ export default function HomepageContact(): JSX.Element {
                         {ContactOptions.map((option, idx) => (
                             <li key={idx}>
                                 <a href={option.href} className={styles.contactItem}>
-                                    <img src={useBaseUrl(`/img/icons/${option.icon}`)} alt={option.name}/>
+                                    <img src={withBaseUrl(`/img/icons/${option.icon}`)} alt={option.name}/>
                                     <span>{option.name}</span>
                                 </a>
                             </li>
