@@ -106,7 +106,7 @@ function ProjectDetailView({ title, description, imageUrl, documentationUrl, rep
                 <div className={styles.projectTechnologies}>
                     {technologies.map((props, idx) => (
                         <div key={idx} className={styles.projectTechnology}>
-                            <img src={useBaseUrl(`/img/skills/${props.imageUrl})`)} alt={props.name}/>
+                            <img src={useBaseUrl(`/img/skills/${props.imageUrl}`)} alt={props.name}/>
                             <p>{props.name}</p>
                         </div>
                     ))}
