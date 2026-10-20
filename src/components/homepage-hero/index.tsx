@@ -1,6 +1,7 @@
 import styles from './styles.module.css';
 import {JSX} from "react";
 import useBrokenLinks from "@docusaurus/useBrokenLinks";
+import useBaseUrl from "@docusaurus/useBaseUrl";
 
 
 export default function (): JSX.Element {
@@ -9,7 +10,7 @@ export default function (): JSX.Element {
     return (
         <section className={styles.heroSection} id="about-me">
             <div className={`${styles.heroContent} container`}>
-                <img className={styles.heroImage} src="/img/photo.webp"/>
+                <img className={styles.heroImage} src={useBaseUrl("/img/photo.webp")}/>
                 <p className={styles.greeting}>
                     Hey there. 👋 I am
                 </p>

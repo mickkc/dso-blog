@@ -2,6 +2,7 @@ import clsx from "clsx";
 import {JSX, useEffect, useRef, useState} from "react";
 import styles from './styles.module.css';
 import useBrokenLinks from "@docusaurus/useBrokenLinks";
+import useBaseUrl from "@docusaurus/useBaseUrl";
 
 type Skill = {
     icon: string;
@@ -130,7 +131,7 @@ function Skill({ icon, name, bulletPoints }: Skill) {
     return (
         <div className="card padding--none">
             <div className={styles.skillContent}>
-                <img src={`/img/skills/${icon}`} alt={name} className={styles.skillImage}/>
+                <img src={useBaseUrl(`/img/skills/${icon}`)} alt={name} className={styles.skillImage}/>
                 <p className={styles.skillName}>
                     {name}
                 </p>

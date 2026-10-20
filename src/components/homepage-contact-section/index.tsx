@@ -1,6 +1,7 @@
 import styles from './styles.module.css';
 import {JSX} from "react";
 import useBrokenLinks from "@docusaurus/useBrokenLinks";
+import useBaseUrl from "@docusaurus/useBaseUrl";
 
 type ContactOption = {
     icon: string;
@@ -41,7 +42,7 @@ export default function HomepageContact(): JSX.Element {
                         {ContactOptions.map((option, idx) => (
                             <li key={idx}>
                                 <a href={option.href} className={styles.contactItem}>
-                                    <img src={`/img/icons/${option.icon}`} alt={option.name}/>
+                                    <img src={useBaseUrl(`/img/icons/${option.icon}`)} alt={option.name}/>
                                     <span>{option.name}</span>
                                 </a>
                             </li>

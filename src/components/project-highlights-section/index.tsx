@@ -2,6 +2,7 @@ import {JSX, useState} from "react";
 import styles from './styles.module.css';
 import clsx from "clsx";
 import useBrokenLinks from "@docusaurus/useBrokenLinks";
+import useBaseUrl from "@docusaurus/useBaseUrl";
 
 type ProjectTechnology = {
     name: string;
@@ -105,20 +106,20 @@ function ProjectDetailView({ title, description, imageUrl, documentationUrl, rep
                 <div className={styles.projectTechnologies}>
                     {technologies.map((props, idx) => (
                         <div key={idx} className={styles.projectTechnology}>
-                            <img src={`/img/skills/${props.imageUrl}`} alt={props.name}/>
+                            <img src={useBaseUrl(`/img/skills/${props.imageUrl})`)} alt={props.name}/>
                             <p>{props.name}</p>
                         </div>
                     ))}
                 </div>
             </div>
-            <img src={`/img/projects/${imageUrl}`} className={styles.projectImage}/>
+            <img src={useBaseUrl(`/img/projects/${imageUrl}`)} className={styles.projectImage}/>
             <div className={styles.projectDescription}>
                 <p>{description}</p>
                 <div className={styles.projectButtons}>
-                    {documentationUrl ? <a href={documentationUrl} className={clsx('button button--primary')} target="_blank">
+                    {documentationUrl ? <a href={useBaseUrl(documentationUrl)} className="button button--primary" target="_blank">
                         Documentation
                     </a> : null}
-                    {repositoryUrl ? <a href={repositoryUrl} className={clsx('button button--secondary')} target="_blank">
+                    {repositoryUrl ? <a href={repositoryUrl} className="button button--secondary" target="_blank">
                         GitHub
                     </a> : null}
                 </div>
@@ -148,7 +149,7 @@ export default function ProjectHighlights(): JSX.Element {
                             </li>
                         ))}
 
-                        <a href="/docs/projects/overview" className={styles.moreProjects}>
+                        <a href={useBaseUrl("/docs/projects/overview")} className={styles.moreProjects}>
                             <svg width="30" height="25" viewBox="0 0 30 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill="currentColor" d="M21.3356 14.795H7.65397C7.52208 14.795 7.41381 14.7602 7.32915 14.6904C7.24449 14.6206 7.20216 14.5314 7.20216 14.4227V3.90731C7.20216 3.64984 7.0967 3.4343 6.88578 3.2607C6.67511 3.0869 6.41354 3 6.10108 3C5.78862 3 5.52705 3.0869 5.31638 3.2607C5.10546 3.4343 5 3.64984 5 3.90731V14.4227C5 15.026 5.25924 15.5414 5.77773 15.9688C6.29646 16.396 6.92187 16.6097 7.65397 16.6097H21.3356L16.7052 20.4249C16.4869 20.605 16.3717 20.8187 16.3595 21.0661C16.3472 21.3133 16.455 21.5307 16.6828 21.7184C16.9106 21.9061 17.1722 22 17.4675 22C17.7631 22 18.0248 21.9061 18.2526 21.7184L24.6245 16.4678C24.762 16.3545 24.8589 16.235 24.9152 16.1094C24.9717 15.9838 25 15.8481 25 15.7024C25 15.5566 24.9717 15.4209 24.9152 15.2953C24.8589 15.1697 24.762 15.0502 24.6245 14.9369L18.2298 9.66753C18.0116 9.48768 17.7561 9.39896 17.4635 9.40138C17.1708 9.4036 16.9106 9.49856 16.6828 9.68628C16.4702 9.87399 16.3601 10.0864 16.3525 10.3235C16.3449 10.5608 16.455 10.7733 16.6828 10.9611L21.3356 14.795Z"/>
                             </svg>
@@ -164,7 +165,7 @@ export default function ProjectHighlights(): JSX.Element {
                         <ProjectDetailView key={idx} {...props} />
                     ))}
 
-                    <a href="/docs/projects/overview" className={styles.moreProjects}>
+                    <a href={useBaseUrl("/docs/projects/overview")} className={styles.moreProjects}>
                         <svg width="30" height="25" viewBox="0 0 30 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill="currentColor" d="M21.3356 14.795H7.65397C7.52208 14.795 7.41381 14.7602 7.32915 14.6904C7.24449 14.6206 7.20216 14.5314 7.20216 14.4227V3.90731C7.20216 3.64984 7.0967 3.4343 6.88578 3.2607C6.67511 3.0869 6.41354 3 6.10108 3C5.78862 3 5.52705 3.0869 5.31638 3.2607C5.10546 3.4343 5 3.64984 5 3.90731V14.4227C5 15.026 5.25924 15.5414 5.77773 15.9688C6.29646 16.396 6.92187 16.6097 7.65397 16.6097H21.3356L16.7052 20.4249C16.4869 20.605 16.3717 20.8187 16.3595 21.0661C16.3472 21.3133 16.455 21.5307 16.6828 21.7184C16.9106 21.9061 17.1722 22 17.4675 22C17.7631 22 18.0248 21.9061 18.2526 21.7184L24.6245 16.4678C24.762 16.3545 24.8589 16.235 24.9152 16.1094C24.9717 15.9838 25 15.8481 25 15.7024C25 15.5566 24.9717 15.4209 24.9152 15.2953C24.8589 15.1697 24.762 15.0502 24.6245 14.9369L18.2298 9.66753C18.0116 9.48768 17.7561 9.39896 17.4635 9.40138C17.1708 9.4036 16.9106 9.49856 16.6828 9.68628C16.4702 9.87399 16.3601 10.0864 16.3525 10.3235C16.3449 10.5608 16.455 10.7733 16.6828 10.9611L21.3356 14.795Z"/>
                         </svg>
