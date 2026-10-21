@@ -67,6 +67,9 @@ const config: Config = {
   ],
 
   themeConfig: {
+    colorMode: {
+      respectPrefersColorScheme: true
+    },
     image: 'img/social-card.jpg',
     navbar: {
       title: 'Tim Schachtner',
