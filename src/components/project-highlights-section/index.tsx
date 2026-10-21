@@ -121,7 +121,7 @@ function ProjectDetailView({ title, description, imageUrl, documentationUrl, rep
                     {documentationUrl ? <a href={withBaseUrl(documentationUrl)} className="button button--primary" target="_blank">
                         Documentation
                     </a> : null}
-                    {repositoryUrl ? <a href={repositoryUrl} className="button button--secondary" target="_blank">
+                    {repositoryUrl ? <a href={repositoryUrl} className="button button--outline button--secondary" target="_blank">
                         GitHub
                     </a> : null}
                 </div>

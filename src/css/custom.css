@@ -67,6 +67,10 @@
   background: var(--ifm-color-primary);
 }
 
-.button--primary {
+.button--primary, .button--primary:hover {
   color: var(--custom-color-on-primary);
+}
+
+.button--primary, .button--secondary {
+  border-radius: 999px;
 }

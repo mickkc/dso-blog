@@ -4,8 +4,8 @@
 
 .contactContainer {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    grid-template-columns: 1fr auto;
+    gap: 5rem;
 }
 
 .contactListHeader {

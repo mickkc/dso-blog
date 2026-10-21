@@ -43,7 +43,7 @@
     align-items: start;
     justify-content: center;
     gap: 0;
-    background: var(--ifm-color-primary-light);
+    background: #4F7399;
     color: var(--custom-color-on-primary);
     opacity: 0;
     will-change: opacity;
@@ -117,7 +117,7 @@
 
     .skillContent {
         position: initial;
-        padding: 0.25rem;
+        padding: 0.25rem 0.25rem 0.25rem 1rem;
         font-size: small;
     }
 
@@ -125,6 +125,7 @@
         opacity: 1;
         flex: 1;
         background: none;
+        color: var(--ifm-color-content);
     }
 
     .skillList > div {
