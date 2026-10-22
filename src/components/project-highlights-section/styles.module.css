@@ -131,7 +131,7 @@
     text-decoration: underline;
 }
 
-@media screen and (max-width: 996px) {
+@media (max-width: 996px) {
     .projectBrowser {
         display: none;
     }
@@ -144,6 +144,14 @@
     }
     .projectTechnologies {
         justify-self: start;
+    }
+}
+
+@media (max-width: 390px) {
+    .projectButtons {
+        flex-direction: column;
+        align-self: stretch;
+        justify-content: stretch;
     }
 }
 

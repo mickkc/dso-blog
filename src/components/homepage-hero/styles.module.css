@@ -1,12 +1,11 @@
 .heroSection {
     background: var(--ifm-color-primary);
     color: var(--custom-color-on-primary);
-    padding-bottom: 1rem;
+    padding: 2rem 0;
 }
 
 .heroContent {
     gap: 1rem;
-    padding: 2rem 0;
 }
 
 .greeting {
@@ -25,7 +24,13 @@
     margin-left: 1rem;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 690px) {
+    .heroSection p, .heroSection h1 {
+        margin: 0;
+    }
+    .name {
+        font-size: 3rem;
+    }
     .heroContent {
         display: flex;
         flex-direction: column;
@@ -36,6 +41,7 @@
         width: 100%;
         max-width: 300px;
         margin: 0;
+        align-self: center;
     }
     .heroDescription {
         order: 2;
@@ -43,5 +49,11 @@
     .heroContent > a {
         order: 3;
         align-self: center;
+    }
+}
+
+@media (max-width: 360px) {
+    .name {
+        font-size: 2rem;
     }
 }

@@ -133,3 +133,13 @@
         grid-template-columns: 100px 1fr;
     }
 }
+
+@media (max-width: 420px) {
+    .skillList > div {
+        grid-template-columns: 1fr;
+    }
+    .skillContent {
+        font-size: initial;
+        padding: 0.5rem;
+    }
+}
