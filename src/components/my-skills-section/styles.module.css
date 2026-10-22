@@ -1,0 +1,145 @@
+.skills {
+    display: flex;
+    align-items: center;
+    padding: 2rem 0;
+    width: 100%;
+}
+
+.skillList {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-rows: 1fr;
+    gap: 1rem;
+}
+
+.skillImage {
+    width: 80px;
+    align-self: center;
+    margin-bottom: 0.75rem;
+}
+
+.skillName {
+    text-align: center;
+    margin: 0;
+    font-weight: bold;
+}
+
+.skillList > div {
+    position: relative;
+}
+
+.skillContent {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.skillOverlay {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: 0;
+    background: #4F7399;
+    color: var(--custom-color-on-primary);
+    opacity: 0;
+    will-change: opacity;
+    transition: opacity 256ms;
+    z-index: 99;
+    padding: 0.5rem 1rem;
+    height: 100%;
+}
+
+.skillOverlay > p {
+    margin: 0;
+    font-weight: bold;
+}
+
+.skillOverlay:hover {
+    opacity: 1;
+}
+
+@media (max-width: 1050px) {
+    .skillList {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.pagination {
+    display: none;
+}
+
+@media (max-width: 700px) {
+    .skillList {
+        grid-template-columns: none;
+        grid-template-rows: repeat(3, 1fr);
+        grid-auto-flow: column;
+        grid-auto-columns: 100%;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        padding-bottom: 0.25rem;
+    }
+
+    .skillList::-webkit-scrollbar {
+        display: none;
+    }
+
+    .skillList > div:nth-child(3n + 1) {
+        scroll-snap-align: start;
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 1rem;
+    }
+
+    .paginationDot {
+        width: 10px;
+        height: 10px;
+        padding: 0;
+        border: none;
+        border-radius: 5px;
+        background: var(--ifm-color-secondary-darkest);
+        cursor: pointer;
+        transition: background 256ms, width 256ms;
+    }
+
+    .paginationDotActive {
+        background: var(--ifm-color-secondary);
+        width: 20px;
+    }
+
+    .skillContent {
+        position: initial;
+        padding: 0.25rem 0.25rem 0.25rem 1rem;
+        font-size: small;
+    }
+
+    .skillOverlay {
+        opacity: 1;
+        flex: 1;
+        background: none;
+        color: var(--ifm-color-content);
+    }
+
+    .skillList > div {
+        display: grid;
+        grid-template-columns: 100px 1fr;
+    }
+}
+
+@media (max-width: 420px) {
+    .skillList > div {
+        grid-template-columns: 1fr;
+    }
+    .skillContent {
+        font-size: initial;
+        padding: 0.5rem;
+    }
+}

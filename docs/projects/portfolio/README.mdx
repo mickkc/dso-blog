@@ -1,0 +1,302 @@
+# Portfolio
+
+My portfolio website, built on top of my [Docusaurus blog](/docs/projects/docusaurus-blog) with custom React components and CSS modules.
+
+import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
+
+<GithubLinkAdmonition
+    link="https://github.com/mickkc/dso-blog"
+    title="View the GitHub Repository"
+    type="tip"/>
+
+## TOC
+
+- [Description](#description)
+- [Quickstart](#quickstart)
+    - [Prerequisites](#prerequisites)
+    - [How to start](#how-to-start)
+- [Usage](#usage)
+    - [Starting the development server](#starting-the-development-server)
+    - [Building the project](#building-the-project)
+    - [Configuration](#configuration)
+    - [Customizing the content](#customizing-the-content)
+        - [Hero](#hero)
+        - [My skills](#my-skills)
+        - [Project highlights](#project-highlights)
+        - [Contact](#contact)
+        - [Colors and fonts](#colors-and-fonts)
+- [Deployment](#deployment)
+    - [GitHub Pages](#github-pages)
+    - [Docker & NGINX](#docker--nginx)
+- [Technical explanation](#technical-explanation)
+    - [Page layout](#page-layout)
+    - [Components](#components)
+    - [Custom header and footer](#custom-header-and-footer)
+    - [Base URL handling](#base-url-handling)
+- [Further References](#further-references)
+
+## Description
+
+The homepage of this site is my portfolio. It introduces me, lists my skills, shows a selection of my projects and
+tells visitors how to contact me. Every project in the highlights section links to its own documentation page in the
+[projects section](/docs/projects/overview) of this site.
+
+The portfolio is made of the following sections, each implemented as its own React component:
+
+| Section            | Component                                   | Description                                                                                           |
+|--------------------|---------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| Header             | `src/components/homepage-navbar`            | Navigation bar with anchor links and a dark/light mode toggle. Hides while scrolling down.            |
+| Hero               | `src/components/homepage-hero`              | Photo, name, job title, a short introduction and a "Contact me" button.                               |
+| My skills          | `src/components/my-skills-section`          | A grid of skill cards, scrolling horizontally on mobile. Hovering a card shows how I used that skill. |
+| Project highlights | `src/components/project-highlights-section` | Tab-style project browser on desktop, a plain list on mobile.                                         |
+| Contact            | `src/components/homepage-contact-section`   | A short text and a list of contact options.                                                           |
+| Footer             | `src/components/homepage-footer`            | A "back to top" arrow and the copyright notice.                                                       |
+
+The rest of the site (docs, project reports) still uses the regular Docusaurus layout.
+
+## Quickstart
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) 18 or later
+- [pnpm](https://pnpm.io/) (`npm` works as well)
+- [Docker](https://docs.docker.com/engine/install) (only needed for [deploying with NGINX](#docker--nginx))
+
+### How to start
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/mickkc/dso-blog
+    cd dso-blog
+    ```
+2. Create your configuration from the example (see [Configuration](#configuration)):
+    ```bash
+    cp example.env .env
+    ```
+3. Install the dependencies:
+    ```bash
+    pnpm install
+    ```
+4. Start the development server:
+    ```bash
+    pnpm start
+    ```
+5. Open http://localhost:3000 (plus the `BASE_URL`, e.g. http://localhost:3000/dso-blog/) in your browser.
+
+## Usage
+
+### Starting the development server
+
+```bash
+pnpm start
+```
+
+This starts a local development server with hot reloading, so most changes to components, CSS or Markdown show up
+immediately without a restart.
+
+### Building the project
+
+```bash
+pnpm build
+```
+
+This generates a static version of the whole site in the `build/` directory.
+Because `onBrokenLinks` is set to `throw` in `docusaurus.config.ts`, the build fails if any internal link or anchor is broken.
+
+To check the production build locally, run:
+
+```bash
+pnpm serve
+```
+
+To check the TypeScript code for type errors, run:
+
+```bash
+pnpm typecheck
+```
+
+### Configuration
+
+The site is configured using environment variables, which are loaded from a `.env` file by `docusaurus.config.ts`
+(using [dotenv](https://github.com/motdotla/dotenv)). The `example.env` file contains the values used for my deployment.
+
+| Name                 | Description                                                                                | Default                              |
+|----------------------|--------------------------------------------------------------------------------------------|--------------------------------------|
+| `DEPLOYMENT_URL`     | The URL the site is hosted at, without the path.                                           | `https://mickkc.github.io`           |
+| `BASE_URL`           | The path the site is served under. For GitHub Pages this is usually `/<repository-name>/`. | `/`                                  |
+| `DEPLOYMENT_BRANCH`  | The branch used for deployment and for the "Edit this page" links.                         | `main` (for edit links)              |
+| `GITHUB_ORG`         | The GitHub user or organization that owns the repository.                                  | None                                 |
+| `GITHUB_PROJECT`     | The name of the repository.                                                                | None                                 |
+| `GIT_REPOSITORY_URL` | The repository URL used in the navbar and the "Edit this page" links.                      | `https://github.com/mickkc/dso-blog` |
+| `BLOG_ENABLED`       | Set to `true` to enable the blog.                                                          | `false`                              |
+
+:::note
+Changes to the `.env` file require restarting the development server.
+:::
+
+### Customizing the content
+
+All content on the homepage lives directly in the components, mostly as typed arrays at the top of the file.
+To change what the portfolio shows, edit these arrays instead of the JSX below them.
+
+#### Hero
+
+The name, job title and introduction are written directly in `src/components/homepage-hero/index.tsx`.
+The photo is loaded from `static/img/photo.webp`. To use a different photo, replace that file
+or change the path passed to `useBaseUrl`.
+
+#### My skills
+
+Skills are defined in the `SkillList` array in `src/components/my-skills-section/index.tsx`:
+
+```tsx
+{
+    icon: 'docker.svg',
+    name: 'Docker',
+    bulletPoints: [
+        'Custom images with Dockerfiles',
+        'Multi-container stacks with Compose',
+    ]
+},
+```
+
+| Field          | Description                                                                 |
+|----------------|-----------------------------------------------------------------------------|
+| `icon`         | File name of the icon inside `static/img/skills/`.                          |
+| `name`         | The name shown on the card.                                                 |
+| `bulletPoints` | Shown in an overlay when hovering the card ("How I used this skill").       |
+
+The list is paginated automatically: the number of pagination dots is calculated from the scroll width of the list,
+so adding or removing skills doesn't require any other changes.
+
+#### Project highlights
+
+Projects are defined in the `ProjectList` array in `src/components/project-highlights-section/index.tsx`:
+
+```tsx
+{
+    title: 'Minecraft Server',
+    description: 'A Minecraft server configuration that uses Docker ...',
+    imageUrl: 'minecraft.jpg',
+    documentationUrl: '/docs/projects/mc-server/',
+    repositoryUrl: 'https://github.com/mickkc/mc-server',
+    technologies: [
+        { name: 'Docker', imageUrl: 'docker.svg' },
+    ]
+},
+```
+
+| Field              | Description                                                                                       |
+|--------------------|---------------------------------------------------------------------------------------------------|
+| `title`            | Shown in the project navigation and as the heading.                                               |
+| `description`      | The project description.                                                                          |
+| `imageUrl`         | File name of the banner inside `static/img/projects/`.                                            |
+| `documentationUrl` | Link to the project's documentation page, without the base URL. `null` hides the button.          |
+| `repositoryUrl`    | Link to the GitHub repository. `null` hides the button (e.g. for the Juice Shop project).         |
+| `technologies`     | Small badges next to the title. `imageUrl` refers to an icon inside `static/img/skills/`.         |
+
+The first project in the list is selected by default.
+
+#### Contact
+
+Contact options are defined in the `ContactOptions` array in `src/components/homepage-contact-section/index.tsx`.
+Each option has an `icon` (inside `static/img/icons/`), an `href` (e.g. a `mailto:` link) and a `name`.
+To add e.g. a LinkedIn link, add a new entry and put its icon into `static/img/icons/`.
+
+#### Colors and fonts
+
+Global styles are defined in `src/css/custom.css`:
+
+- The primary colors are set using the Infima variables (`--ifm-color-primary-*`), once for light and once for dark mode (`[data-theme='dark']`).
+- The [Quicksand](https://fonts.google.com/specimen/Quicksand) font is loaded from `static/fonts/` and set as the base font.
+- Heading sizes are set using the `--ifm-h*-font-size` variables.
+
+Each component also has its own `styles.module.css` file. Because these are CSS modules, class names are scoped to the
+component and can't conflict with each other or with Docusaurus' own styles.
+
+The site follows the operating system's preferred color scheme (`respectPrefersColorScheme: true`), and visitors can
+switch it manually using the toggle in the header.
+
+## Deployment
+
+### GitHub Pages
+
+The site is deployed automatically using GitHub Actions:
+
+- `.github/workflows/ci-cd.yaml` runs on every push and pull request to `main` and calls the deploy workflow.
+- `.github/workflows/deploy.yaml` installs the dependencies, copies `example.env` to `.env`, builds the site and uploads the `build/` directory as a Pages artifact.
+  The artifact is only deployed when the workflow runs on the default branch, so pull requests are built (and checked for broken links) but not published.
+
+To set this up in your own fork:
+
+1. Update the values in `example.env` to match your GitHub user and repository.
+2. In the repository, open `Settings > Pages > Build and deployment` and set the source to **GitHub Actions**.
+3. Push to `main`.
+
+### Docker & NGINX
+
+The `Dockerfile` uses a multi-stage build: the first stage builds the site using Node.js, the second stage copies
+the `build/` directory into an NGINX image, which serves it as static files.
+
+```bash
+# Build the image
+docker build -t portfolio .
+
+# Run it on port 8080
+docker run -d -p 8080:80 portfolio
+```
+
+The site is then available at http://localhost:8080.
+
+## Technical explanation
+
+### Page layout
+
+`src/pages/index.tsx` is the homepage. It wraps the sections in the Docusaurus `Layout` component, which provides the
+page metadata, color mode, header and footer:
+
+```tsx
+<Layout title={siteConfig.title} description="...">
+    <HomepageHero/>
+    <SkillComponent/>
+    <ProjectHighlights/>
+    <HomepageContact/>
+</Layout>
+```
+
+### Components
+
+Every component lives in its own directory inside `src/components`, with the component in `index.tsx` and
+its styles in `styles.module.css`. The data each component renders is modeled with TypeScript types (e.g. `Skill`,
+`ProjectDetails`, `ContactOption`).
+
+Some details worth mentioning:
+
+- **Header**: The `useHideOnScroll` hook compares the current scroll position with the previous one and hides the
+  header while scrolling down, unless the mobile menu is open. On small screens, the links collapse into a menu button.
+- **My skills**: The pagination dots are calculated from `scrollWidth` and `clientWidth` and update on scroll and on resize.
+  Clicking a dot scrolls smoothly to that page.
+- **Project highlights**: On desktop, the projects are shown as a tab list next to a detail view, and the selected project
+  is kept in state. On mobile, all projects are rendered as a list instead.
+- **Anchors**: The sections register their ids (`about-me`, `my-skills`, `my-projects`, `contact`) using `useBrokenLinks().collectAnchor(...)`,
+  so Docusaurus knows these anchors exist and doesn't report the header links as broken.
+
+### Custom header and footer
+
+The navbar and footer are customized using wrapper components in `src/theme/Navbar` and `src/theme/Footer`.
+They check the current path and render the custom `HomepageNavbar` and `HomepageFooter` only on the homepage.
+All other pages keep the original Docusaurus navbar and footer.
+
+### Base URL handling
+
+Because the site is served from a sub path on GitHub Pages (`/dso-blog/`), every image and internal link has to include
+the base URL. Inside components, this is done using `useBaseUrl` or, for paths built inside loops, `withBaseUrl` from
+`useBaseUrlUtils`, since React hooks can't be called conditionally or in loops.
+
+## Further References
+
+- This project's repository on GitHub: https://github.com/mickkc/dso-blog
+- The blog this portfolio is built on: [Docusaurus Blog](/docs/projects/docusaurus-blog)
+- Docusaurus documentation: https://docusaurus.io/docs
+- CSS modules in Docusaurus: https://docusaurus.io/docs/styling-layout#css-modules
+- Project checklist: [PDF](Docusaurus-Portfolio-Checkliste.pdf)
